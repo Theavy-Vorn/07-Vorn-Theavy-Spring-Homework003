@@ -1,6 +1,7 @@
 package org.example.springexceptionhomework003.repository;
 
 import org.apache.ibatis.annotations.*;
+import org.example.springexceptionhomework003.model.dto.request.EventRequest;
 import org.example.springexceptionhomework003.model.entity.Event;
 import org.example.springexceptionhomework003.model.entity.Venues;
 import org.example.springexceptionhomework003.model.entity.Attendee;
@@ -25,4 +26,18 @@ public interface EventRepository {
 
     })
     List<Event> getEvent();
+
+    @Select("""
+       SELECT * FROM events WHERE event_id =#{evenId};
+    """)
+
+    @ResultMap("EventMapper")
+    Event getEventbyId(Integer eventId);
+
+    @Select("""
+       INSERT INTO events(event_name,event_date,venue_id)
+       VALUES (#{request.eventName},#{request.eventDate},#{request.id})
+    """)
+    @ResultMap("EventMapper")
+    Event addEvent(@Param("request") EventRequest eventRequest);
 }
