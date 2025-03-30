@@ -24,7 +24,7 @@ public interface AttendeeRepository {
     @ResultMap("AttendeeMapper")
     Attendee getAttendeebyId(Integer attendeeId);
 
-    @Update("""
+    @Select("""
         UPDATE attendee
         SET attendee_name = #{request.attendeeName}, email = #{request.email}
         WHERE attendee_id = #{id}

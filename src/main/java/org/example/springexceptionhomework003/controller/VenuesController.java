@@ -23,7 +23,9 @@ public class VenuesController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiRespone<List<Venues>>> getVenues() {
+    public ResponseEntity<ApiRespone<List<Venues>>> getVenues(
+
+    ) {
         ApiRespone<List<Venues>> response = ApiRespone.<List<Venues>>builder()
                 .message("Get venues successful")
                 .status(HttpStatus.OK)
