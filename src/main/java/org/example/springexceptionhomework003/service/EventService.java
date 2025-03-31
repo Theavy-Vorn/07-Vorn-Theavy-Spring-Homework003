@@ -11,5 +11,7 @@ public interface EventService {
 
     Event getEventbyId(Integer eventId);
 
-    Event addEvent(@Valid EventRequest eventRequest);
+    Event addEvent(EventRequest eventRequest);
+
+    Event updateEvent(Integer eventId, EventRequest eventRequest);
 }

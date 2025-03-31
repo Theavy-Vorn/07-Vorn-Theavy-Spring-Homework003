@@ -6,6 +6,7 @@ import org.example.springexceptionhomework003.repository.EventRepository;
 import org.example.springexceptionhomework003.service.EventService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.List;
 @Service
 public class EventServiceImpl implements EventService {
@@ -24,9 +25,27 @@ public class EventServiceImpl implements EventService {
     public Event getEventbyId(Integer eventId) {
         return eventRepository.getEventbyId(eventId);
     }
-
+    //data store in eventRequest
     @Override
     public Event addEvent(EventRequest eventRequest) {
+        //for input value in eventAttentee for loop id of attendee
+        //store value input in event
+
+        System.out.println(eventRequest);
+
+        Event event = eventRepository.addEvent(eventRequest);
+         for (Integer idAt : eventRequest.getAttendeesId()){
+             eventRepository.addEventAttendee(idAt,event.getEventId());
+         }
         return eventRepository.addEvent(eventRequest);
+    }
+
+    @Override
+    public Event updateEvent(Integer eventId, EventRequest eventRequest) {
+        Event event = eventRepository.updateEvent( eventId,eventRequest);
+        for (Integer idAt : eventRequest.getAttendeesId()){
+//            eventRepository.updateEventAttendee(idAt,event.getEventId());
+        }
+        return eventRepository.updateEvent(eventId,eventRequest);
     }
 }

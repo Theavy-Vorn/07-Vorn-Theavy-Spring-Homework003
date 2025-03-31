@@ -8,12 +8,14 @@ import org.example.springexceptionhomework003.model.entity.Venues;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventRequest {
     private String eventName;
     private LocalDate eventDate;
-    private Venues venues;
-    private Attendee attendee;
+    private Integer venuesId;
+    private List<Integer> attendeesId;
 }

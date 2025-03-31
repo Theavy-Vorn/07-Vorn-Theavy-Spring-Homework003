@@ -62,4 +62,15 @@ public class EventController {
                 .build();
         return ResponseEntity.ok(response);
     }
+    @PutMapping("{event-id}")
+    public ResponseEntity<ApiRespone<Event>> updateEvent(@PathVariable("event-id") Integer eventId,@Valid @RequestBody EventRequest eventRequest) {
+        ApiRespone<Event> response = ApiRespone.<Event>builder()
+                .message("update event by id successful")
+                .status(HttpStatus.OK)
+                .success(true)
+                .payload(eventService.updateEvent(eventId,eventRequest))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.ok(response);
+    }
 }

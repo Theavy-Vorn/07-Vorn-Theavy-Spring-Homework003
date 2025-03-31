@@ -36,8 +36,23 @@ public interface EventRepository {
 
     @Select("""
        INSERT INTO events(event_name,event_date,venue_id)
-       VALUES (#{request.eventName},#{request.eventDate},#{request.id})
+       VALUES (#{request.eventName},#{request.eventDate},#{request.venuesId})
+       returning *
     """)
     @ResultMap("EventMapper")
     Event addEvent(@Param("request") EventRequest eventRequest);
+
+    @Insert("""
+        INSERT INTO event_attendee(event_id,attendee_id)
+        VALUES (#{eventId},#{idAt});
+    """)
+    void addEventAttendee(Integer idAt, Integer eventId);
+
+    @Select("""
+        UPDATE events SET event_name=#{eventName},event_date=#{eventDate},venue_id=#{venuesId}
+        WHERE event_id = #{eventId};
+    """)
+    @ResultMap("EventMapper")
+    Event updateEvent(Integer eventId, EventRequest eventRequest);
+
 }
